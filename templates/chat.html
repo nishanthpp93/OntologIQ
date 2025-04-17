@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Previous head content remains the same -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OncologIQ Chat Interface - Get answers to your cancer-related questions" />
+    <title>OncologIQ Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --secondary: #64748b;
+      --background: #f8fafc;
+      --white: #ffffff;
+      --text: #1e293b;
+      --success: #10b981;
+      --user-msg: #e0f2fe;
+      --assistant-msg: #f0fdf4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--background);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .content-section {
+      flex: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 180px);
+    }
+
+    .response-container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: calc(100vh - 250px);
+    }
+
+    .response-box {
+      flex: 1;
+      background: var(--white);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1rem;
+    }
+
+    .response-box pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .response-box code {
+      font-family: monospace;
+      background: #f1f5f9;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+
+    .user-msg, .assistant-msg {
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      max-width: 85%;
+    }
+
+    .user-msg {
+      background: var(--user-msg);
+      margin-left: auto;
+    }
+
+    .assistant-msg {
+      background: var(--assistant-msg);
+      margin-right: auto;
+    }
+
+    .message-header {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+
+    .input-container {
+      margin-top: auto;
+      padding: 1rem;
+      background: var(--white);
+      border-radius: 1rem;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+
+    textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .button-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .new-chat-btn {
+      background: var(--secondary);
+      color: var(--white);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .right-column {
+      height: calc(100vh - 250px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .info-box {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-box h2 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .history-list {
+      list-style: none;
+    }
+
+    .history-list a {
+      display: block;
+      padding: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .history-list a:hover {
+      background: var(--background);
+      color: var(--primary);
+    }
+
+    .sources-list {
+      list-style: none;
+    }
+
+    .source-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .source-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .source-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .source-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background: var(--white);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+      margin-top: auto;
+    }
+
+    .footer-links {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .markdown-content {
+      white-space: pre-wrap;
+      padding-left: 0.75rem;
+      line-height: 1.1;  /* This will create double spacing */
+    }
+
+    .markdown-content pre {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #f1f5f9;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .markdown-content code {
+      font-family: monospace;
+      background: #f1f5f9;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+
+    .markdown-content p {
+      margin: 0.35rem 0;
+    }
+
+    .markdown-content ul,
+    .markdown-content ol {
+      margin: 0.35rem 0;
+      padding-left: 1rem;
+    }
+
+    .markdown-content li {
+      margin: 0.15rem 0;
+    }
+
+    .markdown-content h1,
+    .markdown-content h2,
+    .markdown-content h3,
+    .markdown-content h4,
+    .markdown-content h5,
+    .markdown-content h6 {
+      margin: 1rem 0 0.5rem 0;
+      line-height: 0.75;
+    }
+
+    @media (max-width: 1024px) {
+      .response-container {
+        grid-template-columns: 1fr;
+      }
+
+      .right-column {
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .left-column {
+        height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .content-section {
+        padding: 1rem;
+      }
+
+      .button-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">
+      <img src="../static/logo.jpg" alt="OncologIQ Logo" class="logo">
+    </a>
+  </header>
+
+  <section class="content-section">
+    <div class="response-container">
+      <div class="left-column">
+        <div class="response-box">
+          {% if conversation_history and conversation_history|length > 0 %}
+            {% for message in conversation_history %}
+              {% if message.role == "user" %}
+                <div class="user-msg">
+                  <div class="message-header">You</div>
+                  {{ message.content }}
+                </div>
+              {% else %}
+                <div class="assistant-msg">
+                  <div class="message-header">Assistant</div>
+                  <div class="markdown-content">
+                    {{ message.content|markdown|safe }}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div class="assistant-msg">
+              <div class="message-header">Assistant</div>
+              <p>Hi, I'm your OncologIQ Assistant. I'm here to answer your questions about cancer care and treatment.</p>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="input-container">
+          <form action="/submit" method="post">
+            <textarea
+              id="question"
+              name="question"
+              placeholder="Type your question here..."
+              required
+            ></textarea>
+            <div class="button-container">
+              <button type="submit" class="submit-btn">Send Message</button>
+              <button type="button" class="new-chat-btn" onclick="startNewChat()">New Chat</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="info-box">
+          <h2>Sources</h2>
+          <div class="sources-list">
+            {% if sources and sources|length > 0 %}
+              {% for src in sources %}
+                <div class="source-item">
+                  <a href="{{ src.link }}" target="_blank" class="source-link">{{ src.file_name }}</a>
+                  <div>Page: {{ src.page_label }}</div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p>No source documents available for this response.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h2>Chat History</h2>
+          {% if past_conversations %}
+            <ul class="history-list">
+              {% for conv in past_conversations %}
+                <li>
+                  <a href="{{ url_for('load_conversation', conv_id=conv.id) }}">
+                    {{ conv.summary }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No past conversations.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy_policy">Privacy Policy</a>
+      <a href="/terms_of_service">Terms of Service</a>
+      <a href="/about_us">About Us</a>
+    </div>
+    <p>
+      Information based on
+      <a href="https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients" target="_blank">
+        NCCN Guidelines for Patients
+      </a>
+    </p>
+    <p>&copy; 2025 OncologIQ. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form[action="/submit"]');
+      const responseBox = document.querySelector('.response-box');
+      const sourcesBox = document.querySelector('.sources-list');
+
+      function scrollToBottom() {
+        responseBox.scrollTop = responseBox.scrollHeight;
+      }
+
+      // Configure marked options globally
+      marked.setOptions({
+        breaks: true,
+        gfm: true,
+        headerIds: false,
+        mangle: false,
+        pedantic: false
+      });
+
+      // Function to safely parse and render markdown
+      function renderMarkdown(text) {
+        try {
+          return marked.parse(text);
+        } catch (error) {
+          console.error('Error parsing markdown:', error);
+          return text;
+        }
+      }
+
+      // Re-render markdown content for existing messages
+      document.querySelectorAll('.markdown-content').forEach(element => {
+        const rawContent = element.textContent.trim();
+        if (rawContent) {
+          element.innerHTML = renderMarkdown(rawContent);
+        }
+      });
+
+      function startNewChat() {
+        const currentSources = Array.from(document.querySelectorAll('.source-item')).map(item => ({
+          link: item.querySelector('.source-link').href,
+          file_name: item.querySelector('.source-link').textContent,
+          page_label: item.querySelector('div').textContent.replace('Page: ', '')
+        }));
+        localStorage.setItem('lastSources', JSON.stringify(currentSources));
+
+        fetch('/new_conversation', {
+          method: 'POST',
+        }).then(() => {
+          window.location.reload();
+        });
+      }
+      window.startNewChat = startNewChat;
+
+      let activeEventSource = null;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (activeEventSource) {
+          activeEventSource.close();
+        }
+
+        const formData = new FormData(form);
+        const question = formData.get('question');
+
+        // Store current sources
+        const currentSources = Array.from(document.querySelectorAll('.source-item')).map(item => ({
+          link: item.querySelector('.source-link').href,
+          file_name: item.querySelector('.source-link').textContent,
+          page_label: item.querySelector('div').textContent.replace('Page: ', '')
+        }));
+        localStorage.setItem('lastSources', JSON.stringify(currentSources));
+
+        // Create user message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'user-msg';
+        userDiv.innerHTML = `<div class="message-header">You</div>${question}`;
+        responseBox.appendChild(userDiv);
+        scrollToBottom();
+
+        // Create assistant message container
+        const assistantDiv = document.createElement('div');
+        assistantDiv.className = 'assistant-msg';
+        assistantDiv.innerHTML = '<div class="message-header">Assistant</div><div class="markdown-content streaming-content"></div>';
+        responseBox.appendChild(assistantDiv);
+
+        const streamingContent = assistantDiv.querySelector('.streaming-content');
+        let collectedResponse = '';
+
+        form.reset();
+
+        const questionParam = encodeURIComponent(question);
+        activeEventSource = new EventSource(`/submit?question=${questionParam}`);
+
+        activeEventSource.onmessage = function(e) {
+          try {
+            const data = JSON.parse(e.data);
+            switch(data.type) {
+              case 'assistant':
+                collectedResponse += data.content;
+                streamingContent.innerHTML = renderMarkdown(collectedResponse);
+                scrollToBottom();
+                break;
+              case 'sources':
+                if (sourcesBox) {
+                  sourcesBox.innerHTML = data.content.map(src => `
+                    <div class="source-item">
+                      <a href="${src.link}" target="_blank" class="source-link">${src.file_name}</a>
+                      <div>Page: ${src.page_label}</div>
+                    </div>
+                  `).join('');
+                }
+                break;
+              case 'error':
+                streamingContent.innerHTML = `<span style="color: red;">${data.content}</span>`;
+                scrollToBottom();
+                break;
+            }
+          } catch (error) {
+            console.error('Error processing message:', error);
+            streamingContent.innerHTML += '<span style="color: red;">Error processing response</span>';
+            scrollToBottom();
+          }
+        };
+
+        activeEventSource.onerror = function(error) {
+          console.error('EventSource error:', error);
+          if (streamingContent.innerHTML === '') {
+            streamingContent.innerHTML = '<span style="color: red;">Connection error. Please try again.</span>';
+          }
+          activeEventSource.close();
+          scrollToBottom();
+        };
+
+        activeEventSource.addEventListener('end', function() {
+          activeEventSource.close();
+        });
+      });
+
+      // Restore sources on page load
+      const storedSources = localStorage.getItem('lastSources');
+      if (storedSources && sourcesBox && sourcesBox.innerHTML.trim() === 'No source documents available for this response.') {
+        const sources = JSON.parse(storedSources);
+        sourcesBox.innerHTML = sources.map(src => `
+          <div class="source-item">
+            <a href="${src.link}" target="_blank" class="source-link">${src.file_name}</a>
+            <div>Page: ${src.page_label}</div>
+          </div>
+        `).join('');
+      }
+
+      window.addEventListener('beforeunload', function() {
+        if (activeEventSource) {
+          activeEventSource.close();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

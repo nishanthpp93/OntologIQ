@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to OncologIQ - Your trusted resource for cancer care guidance">
+    <title>OncologIQ - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --text: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../static/logo.jpg" alt="OncologIQ Logo" class="logo">
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Your Trusted Resource for Cancer Care Guidance</h1>
+            <p>Access reliable, personalized cancer information through our innovative AI-powered platform. Get instant answers to your questions and make informed decisions about your health journey.</p>
+            <a href="/chat" class="cta-button">Start Your Journey</a>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Expert Knowledge</h3>
+                <p>Access comprehensive information based on NCCN Guidelines, ensuring you receive reliable and up-to-date guidance for your cancer care journey.</p>
+            </div>
+            <div class="feature-card">
+                <h3>24/7 Availability</h3>
+                <p>Get instant answers to your questions anytime, anywhere. Our AI assistant is always here to provide support and information when you need it most.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Personalized Support</h3>
+                <p>Receive tailored information specific to your type of cancer, helping you better understand your condition and treatment options.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 OncologIQ. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy_policy">Privacy Policy</a>
+                <a href="/terms_of_service">Terms of Service</a>
+                <a href="/about_us">About Us</a>
+            </div>
+            <p>
+                Information included on this page is inspired by and based on the
+                <a href="https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients" target="_blank">
+                    NCCN Guidelines for Patients
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

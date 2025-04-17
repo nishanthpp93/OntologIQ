@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about OncologIQ's mission and technology">
+    <title>About OncologIQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --background: #f8fafc;
+            --white: #ffffff;
+            --text: #1e293b;
+            --secondary: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/">
+                <img src="../static/logo.jpg" alt="OncologIQ Logo" class="logo">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <h2>Transforming Access to Cancer Guidelines</h2>
+            <p>
+                Our app revolutionizes how patients access NCCN Guidelines, turning static PDFs into an
+                interactive, accessible resource for reliable cancer information.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Innovation in Healthcare Technology</h2>
+            <p>
+                Using advanced Retrieval-Augmented Generation (RAG), we process official NCCN guidelines
+                into structured, context-aware information chunks. These are transformed into vector
+                embeddings using specialized AI models, enabling precise and relevant responses to your queries.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Our Commitment to You</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Personalized Support</h3>
+                    <p>Real-time, tailored responses to your specific cancer-related questions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Reliable Information</h3>
+                    <p>All responses are based on trusted NCCN Guidelines, ensuring accuracy and reliability.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Empowering Decisions</h3>
+                    <p>Helping you engage more effectively with healthcare providers through informed discussions.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 OncologIQ. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy_policy">Privacy Policy</a>
+                <a href="/terms_of_service">Terms of Service</a>
+                <a href="/about_us">About Us</a>
+            </div>
+            <p>
+                Information based on
+                <a href="https://www.nccn.org/patientresources/patient-resources/guidelines-for-patients" target="_blank">
+                    NCCN Guidelines for Patients
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
